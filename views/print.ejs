@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/printStyle.css">
+    <title>Bill No.<%= data.BILL_CODE %></title>
+</head>
+
+<body>
+
+    <div style="height: 1056px;">
+        <div style="padding-top: 140px; padding-left: 135px;">
+            <p class="print"><%= data.CUSTOMER_NAME %></p>
+            <p class="print" style="margin-top: -20px;"><%= data.ADDRESS_DETAIL %> <%= data.DISTRICT_NAME %> <%= data.SUB_DISTRICT_NAME %></p>
+            <p class="print" style="margin-top: -20px;"><%= data.PROVINCE_NAME %> <%= data.ZIP_CODE %></p>
+            <p class="print" style="margin-top: -20px;">เลขประจำตัวผู้เสียภาษีอากร&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= data.TAXPAYER_NUMBER %></p>
+        </div>
+        <div style="margin-top: -139px; padding-left: 685px;">
+            <p class="print"><%= data.BILL_CODE %></p>
+            <p class="print" style="margin-top: 17px;"><%= data.BILL_DATE %></p>
+            <p class="print" style="margin-top: 20px;"><%= data.BILL_CODE %></p>
+            <input type="hidden" id="productBill" value="<%= data.ID %>">
+        </div>
+        <div id="productList" style="padding-top: 60px; padding-left: 60px; height: 530px;"></div>
+        <div style="margin-top: 53px; padding-left: 675px;">
+            <p class="print"><%= data.TAX_RATE %></p>
+        </div>
+        <div style="margin-top: -80px; padding-left: 725px;">
+            <p class="print" style="margin-top: -4px;"><%= (data.GRAND_TOTAL*1).toFixed(2) %></p>
+            <p class="print" style="margin-top: -4px;"><%= ((data.TAX_RATE/100)*data.GRAND_TOTAL).toFixed(2) %></p>
+            <p class="print" style="margin-top: -4px;"><%= (data.GRAND_TOTAL*1+((data.TAX_RATE/100)*data.GRAND_TOTAL)).toFixed(2) %></p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    var billId = document.getElementById("productBill").value
+    console.log(billId)
+    fetch('https://bill-project-api.herokuapp.com/product/getAll/byBillId?billId='+billId, {
+        method: 'GET'
+    }).then(res => res.json())
+    .then(data => {
+        var productList = document.getElementById("productList")
+        var temp =  '<table>'
+        temp +=     '<tbody>'
+        for (var i=0; i<data.payload.data.length; i++) {
+            temp += '<tr>'
+            temp +=     '<td width="98px" class="print" style="text-align: center;">'+data.payload.data[i].PRODUCT_CODE+'</td>'
+            temp +=     '<td width="322px" class="print" style="padding-left: 15px;">'+data.payload.data[i].PRODUCT_DETAIL+'</td>'
+            temp +=     '<td width="110px" class="print" style="text-align: right; padding-right: 15px;">'+data.payload.data[i].QUANTITY+'</td>'
+            temp +=     '<td width="120px" class="print" style="text-align: right; padding-right: 15px;">'+(data.payload.data[i].AMOUNT/data.payload.data[i].QUANTITY).toFixed(2)+'</td>'
+            temp +=     '<td width="142px" class="print" style="text-align: right; padding-right: 15px;">'+data.payload.data[i].AMOUNT+'</td>'
+            temp += '</tr>'
+        }temp +=     '</tbody>'
+        temp += '</table>'
+        productList.innerHTML = temp
+    })
+</script>
+
+</html>
