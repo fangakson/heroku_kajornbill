@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
+const index = require (path.join (__dirname, 'index.js'))
+
 app.use(express.urlencoded({ extended: false }))
 
 app.set('views', path.join(__dirname, 'views'))
