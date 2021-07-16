@@ -4,7 +4,7 @@ const cookieSession = require('cookie-session')
 const bcrypt = require('bcrypt')
 const { body, validationResult } = require('express-validator')
 const fetch = require("node-fetch");
-const port = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000
 
 const app = express()
 
@@ -273,4 +273,4 @@ app.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
-app.listen(port, () => console.log("Server is running..."))
+app.listen(PORT, () => console.log("Server is running..."))
