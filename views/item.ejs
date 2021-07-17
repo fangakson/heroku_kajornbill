@@ -131,7 +131,7 @@
         }).then(res => res.json())
         .then(data => {
             var table = document.getElementById('itemnovat')
-            var temp = '<table><tr><th>ไอดีสินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา</th><th>เป็นของลูกค้า</th><th></th></tr>'
+            var temp = '<table><tr><th>g]เลขที่สินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา/หน่วย</th><th>เป็นของลูกค้า</th><th></th></tr>'
             for (var i=0; i<data.payload.data.length; i++) {
                 temp += '<tr class="clickable">'
                 temp += '<td><a>'+data.payload.data[i].ID+'</a></td>'
@@ -155,7 +155,7 @@
         }).then(res => res.json())
         .then(data => {
             var table = document.getElementById('itemnovat')
-            var temp = '<table><tr><th>ไอดีสินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา</th><th>เป็นของลูกค้า</th><th></th></tr>'
+            var temp = '<table><tr><th>เลขที่สินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา/หน่วย</th><th>เป็นของลูกค้า</th><th></th></tr>'
             for (var i=0; i<data.payload.data.length; i++) {
                 temp += '<tr class="clickable">'
                 temp += '<td><a>'+data.payload.data[i].ID+'</a></td>'
@@ -183,7 +183,7 @@
                 ipage.appendChild(option)
             }
             var table = document.getElementById('itemnovat')
-            var temp = '<table><tr><th>ไอดีสินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา</th><th>เป็นของลูกค้า</th><th></th></tr>'
+            var temp = '<table><tr><th>เลขที่สินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา/หน่วย</th><th>เป็นของลูกค้า</th><th></th></tr>'
             for (var i=0; i<data.payload.data.length; i++) {
                 temp += '<tr class="clickable">'
                 temp += '<td><a>'+data.payload.data[i].ID+'</a></td>'
@@ -211,7 +211,7 @@
                 ipage.appendChild(option)
             }
             var table = document.getElementById('itemvat')
-            var temp = '<table><tr><th>ไอดีสินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา</th><th>เป็นของลูกค้า</th><th></th></tr>'
+            var temp = '<table><tr><th>เลขที่สินค้า</th><th>รหัสสินค้า</th><th>รายละเอียดสินค้า</th><th>ราคา/หน่วย</th><th>เป็นของลูกค้า</th><th></th></tr>'
             for (var i=0; i<data.payload.data.length; i++) {
                 temp += '<tr class="clickable">'
                 temp += '<td><a>'+data.payload.data[i].ID+'</a></td>'
